@@ -5,52 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexaPOS - Bulut Tabanlı Yeni Nesil Restoran Otomasyonu</title>
 </head>
-<body style="background-color: #0b0f19; color: #f1f5f9; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; user-select: none; min-height: 100vh;">
+<body style="background-color: #0b0f19; color: #f8fafc; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; user-select: none; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
 
     <!-- ========================================================= -->
     <!-- 🔐 MODAL: GÜN BAŞI KASA GİRİŞİ -->
     <!-- ========================================================= -->
-    <div id="gbModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 7, 12, 0.9); display: none; align-items: center; justify-content: center; z-index: 9999;">
-        <div style="background: linear-gradient(135deg, #131c2e 0%, #0c1220 100%); padding: 35px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.15); max-width: 420px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-            <h3 style="color: #38bdf8; margin-bottom: 12px; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.5px;">☀️ Gün Başı Dönem Açılışı</h3>
-            <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px;">Lütfen kasadaki güncel nakit açılış tutarını giriniz:</p>
-            <input type="number" id="openingCashInput" value="500" style="width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #24334d; background: #070b14; color: #fff; text-align: center; font-size: 1.3rem; margin-bottom: 25px; outline: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);">
-            <button onclick="window.isShiftOpen=true; document.getElementById('gbModal').style.display='none'; document.getElementById('shiftStatusTxt').innerText='Dönem: SİSTEM AÇIK (Kasa: ' + document.getElementById('openingCashInput').value + ' TL)'; document.getElementById('panelGbBtn').style.display='none'; document.getElementById('panelGsBtn').style.display='block';" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 14px; border-radius: 10px; font-size: 1.1rem; width: 100%; font-weight: 700; cursor: pointer; border:none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);">Dönemi Resmen Başlat</button>
+    <div id="gbModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 16, 0.9); display: none; align-items: center; justify-content: center; z-index: 9999;">
+        <div style="background: #111827; padding: 35px; border-radius: 16px; border: 1px solid rgba(56, 189, 248, 0.2); max-width: 420px; width: 100%; text-align: center; box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);">
+            <h3 style="color: #38bdf8; margin-bottom: 10px; font-size: 1.4rem; font-weight: 800;">☀️ Gün Başı Dönem Açılışı</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Kasadaki güncel nakit açılış tutarını giriniz:</p>
+            <input type="number" id="openingCashInput" value="500" style="width: 100%; padding: 14px; border-radius: 8px; border: 1px solid #1f2937; background: #0b0f19; color: #fff; text-align: center; font-size: 1.3rem; margin-bottom: 20px; outline: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);">
+            <button onclick="window.isShiftOpen=true; document.getElementById('gbModal').style.display='none'; document.getElementById('shiftStatusTxt').innerText='Dönem: SİSTEM AÇIK (Kasa: ' + document.getElementById('openingCashInput').value + ' TL)'; document.getElementById('panelGbBtn').style.display='none'; document.getElementById('panelGsBtn').style.display='block';" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 14px; border-radius: 8px; font-size: 1rem; width: 100%; font-weight: 700; cursor: pointer; border:none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);">Dönemi Resmen Başlat</button>
         </div>
     </div>
 
     <!-- ========================================================= -->
     <!-- 🔐 EKRAN 1: ŞİFRE GİRİŞ EKRANI (PINPAD) -->
     <!-- ========================================================= -->
-    <div id="pinpadScreen" style="display: block; width: 100%; max-width: 380px; text-align: center; background: linear-gradient(135deg, #131c2e 0%, #0c1220 100%); padding: 40px 35px; border-radius: 24px; border: 1px solid rgba(56, 189, 248, 0.12); box-shadow: 0 30px 60px rgba(0,0,0,0.6); margin: 60px auto;">
-        <h1 style="font-size: 2.6rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.5px; background: linear-gradient(to right, #fff 40%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NexaPOS</h1>
-        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 30px; font-weight: 500;">Lütfen 4 Haneli Personel Şifrenizi Giriniz</p>
-        
-        <!-- Giriş Kutusu - Satır içi HTML tetikleyicisiyle korumaya alındı -->
-        <input type="password" id="pinDisplayInput" maxlength="4" readonly style="background: #060913; width: 100%; border-radius: 12px; font-size: 2.4rem; letter-spacing: 16px; height: 75px; text-align: center; color: #38bdf8; border: 1px solid #1e293b; margin-bottom: 30px; font-weight: 800; outline: none; box-shadow: inset 0 4px 8px rgba(0,0,0,0.4);">
-        
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '1';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">1</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '2';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">2</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '3';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">3</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '4';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">4</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '5';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">5</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '6';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">6</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '7';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">7</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '8';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">8</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '9';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">9</button>
-            <button onclick="document.getElementById('pinDisplayInput').value = '';" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">C</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '0';" style="background: #1e293b; color: #fff; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: 700; border:1px solid rgba(255,255,255,0.03); cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">0</button>
-            <button onclick="if(document.getElementById('pinDisplayInput').value === '1234') { document.getElementById('pinpadScreen').style.display='none'; document.getElementById('sambaMainMenu').style.display='flex'; document.getElementById('pinDisplayInput').value=''; } else { alert('Hatalı Personel Şifresi!'); document.getElementById('pinDisplayInput').value=''; }" style="background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #0f172a; padding: 22px; border-radius: 12px; font-size: 1.6rem; font-weight: bold; border:none; cursor:pointer; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);">✔</button>
+    <div id="pinpadScreen" style="display: block; width: 100%; max-width: 360px; text-align: center; background: #111827; padding: 35px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7); margin: auto;">
+        <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 5px; letter-spacing: -0.5px;">Nexa<span style="color: #38bdf8;">POS</span></h1>
+        <p style="font-size: 0.85rem; color: #4b5563; margin-bottom: 25px; font-weight: 500;">Personel Giriş Şifresini Giriniz</p>
+        <input type="password" id="pinDisplayInput" maxlength="4" readonly style="background: #0b0f19; width: 100%; border-radius: 10px; font-size: 2.4rem; letter-spacing: 15px; height: 75px; text-align: center; color: #38bdf8; border: 1px solid #1f2937; margin-bottom: 25px; font-weight: bold; outline: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+            <!-- Satır içi sarsılmaz event kurgusu -->
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '1';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">1</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '2';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">2</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '3';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">3</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '4';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">4</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '5';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">5</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '6';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">6</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '7';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">7</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '8';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">8</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '9';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">9</button>
+            <button onclick="document.getElementById('pinDisplayInput').value = '';" style="background: #ef4444; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">C</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value.length < 4) document.getElementById('pinDisplayInput').value += '0';" style="background: #1f2937; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">0</button>
+            <button onclick="if(document.getElementById('pinDisplayInput').value === '1234') { document.getElementById('pinpadScreen').style.display='none'; document.getElementById('sambaMainMenu').style.display='flex'; document.getElementById('footerNavTrack').style.display='flex'; document.getElementById('pinDisplayInput').value=''; } else { alert('Hatalı Personel Şifresi!'); document.getElementById('pinDisplayInput').value=''; }" style="background: #10b981; color: #fff; padding: 22px; border-radius: 10px; font-size: 1.6rem; font-weight: 700; border:none; cursor:pointer;">✔</button>
         </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- 👑 EKRAN 2: SAMBAPOS TARZI DEV KURUMSAL ANA MENÜ (DASHBOARD) -->
+    <!-- 👑 EKRAN 2: KURUMSAL KUTULU ENTEGRE ANA MENÜ (DASHBOARD)  -->
     <!-- ========================================================= -->
-    <div id="sambaMainMenu" style="display: none; width: 100vw; height: 100vh; background: #0b0f19; position: fixed; top: 0; left: 0; flex-direction: column; padding: 40px 40px 100px 40px; box-sizing: border-box; justify-content: center; align-items: center; z-index: 500;">
-        <h2 style="font-size: 2.4rem; color:#fff; font-weight:900; margin-bottom:40px; letter-spacing: -0.5px;">NexaPOS <span style="color:#38bdf8; font-weight:500;">Ana İstasyon</span></h2>
+    <div id="sambaMainMenu" style="display: none; width: 100vw; flex: 1; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; padding: 20px;">
+        <h2 style="font-size: 2.2rem; color: #fff; font-weight: 800; margin-bottom: 40px; letter-spacing: -0.5px;">Nexa<span style="color:#38bdf8;">POS</span> Ana İstasyon</h2>
         
-        <!-- Dev Kurumsal Kutular Grid Sistemi -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; width: 100%; max-width: 950px;">
-            <button onclick="checkShiftAndOpen()" style="background: linear-gradient(135deg, #131c2e 0%, #0c1220 100%); color:#38bdf8; border: 1px solid rgba(56, 189, 248, 0.15); padding: 40px 20px; border-radius: 20px; font-size: 1.4rem; font-weight: 800; box-shadow: 0 15px 30px rgba(0,0,0,0.4); height:160px; cursor:pointer;">🖥️ POS (Masalar)</button>
+        <!-- Tüm kutular görseldeki gibi lacivert premium neon gölgeli yapıya kavuşturuldu -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 960px; box-sizing: border-box;">
+            
+            <button onclick="checkShiftAndOpen()" style="background: linear-gradient(145deg, #111625, #1e263f); color: #38bdf8; padding: 35px 20px; border-radius: 16px; font-size: 1.3rem; font-weight: 800; border: 1px solid rgba(56, 189, 248, 0.15); box-shadow: 0 15px 30px rgba(5, 8, 16, 0.6); height: 160px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+                <span style="font-size: 2rem;">🖥️</span> POS (Masalar)
+            </button>
+            
+            <button onclick="openSubPanel('donem')" style="background: linear-gradient(145deg, #111625, #1e263f); color: #ec4899; padding: 35px 20px; border-radius: 16px; font-size: 1.3rem; font-weight: 800; border: 1px solid rgba(236, 72, 153, 0.15); box-shadow: 0 15px 30px rgba(5, 8, 16, 0.6); height: 160px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+                <span style="font-size: 2rem;">☀️</span> Gün İşlemleri
+            </button>
+            
+            <button onclick="openSubPanel('gecmis')" style="background: linear-gradient(145deg, #111625, #1e263f); color: #a855f7; padding: 35px 20px; border-radius: 16px; font-size: 1.3rem; font-weight: 800; border: 1px solid rgba(168, 85, 247, 0.15); box-shadow: 0 15px 30px rgba(5, 8, 16, 0.6); height: 160px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+                <span style="font-size: 2rem;">📑</span> Geçmiş Adisyonlar
+            </button>
+            
