@@ -7,43 +7,41 @@
     <style>
         /* GLOBAL CORES AND STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
-        body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; }
         .hidden { display: none !important; }
         button { cursor: pointer; transition: 0.2s; border: none; font-weight: 600; }
         button:active { transform: scale(0.97); }
 
         /* MODAL WINDOWS STRUCTURE */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 999; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 999; }
         .modal-content { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
         .modal-content h3 { margin-bottom: 15px; color: #38bdf8; }
         .modal-content input { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; text-align: center; font-size: 1.2rem; margin-bottom: 20px; outline: none; }
         .modal-btn { background: #10b981; color: white; padding: 12px 25px; border-radius: 6px; font-size: 1rem; width: 100%; }
 
         /* 🔐 SCREEN 1: PINPAD LOCK SCREEN */
-        .pinpad-screen { width: 100%; max-width: 360px; text-align: center; background: #1e293b; padding: 35px; border-radius: 16px; border: 1px solid #334155; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        .pinpad-screen { width: 100%; max-width: 360px; text-align: center; background: #1e293b; padding: 35px; border-radius: 16px; border: 1px solid #334155; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); margin: auto; }
         .pinpad-logo { font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; }
         .pinpad-logo span { color: #38bdf8; }
         .pinpad-sub { font-size: 0.85rem; color: #64748b; margin-bottom: 25px; }
-        .pin-display { background: #0f172a; padding: 15px; border-radius: 8px; font-size: 2rem; letter-spacing: 10px; height: 70px; display: flex; align-items: center; justify-content: center; color: #38bdf8; border: 1px solid #334155; margin-bottom: 25px; }
+        .pin-display { background: #0f172a; padding: 15px; border-radius: 8px; font-size: 2rem; letter-spacing: 10px; height: 70px; display: flex; align-items: center; justify-content: center; color: #38bdf8; border: 1px solid #334155; margin-bottom: 25px; font-weight: bold; }
         .pin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
         .pin-btn { background: #334155; color: #fff; padding: 20px; border-radius: 8px; font-size: 1.5rem; }
         .pin-btn:hover { background: #475569; }
         .pin-clear { background: #ef4444; } .pin-clear:hover { background: #dc2626; }
 
         /* 🏁 SCREEN 2: SHIFT/WELCOME MANAGEMENT SCREEN */
-        .welcome-screen { width: 100%; max-width: 500px; text-align: center; background: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #334155; }
+        .welcome-screen { width: 100%; max-width: 500px; text-align: center; background: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #334155; margin: auto; }
         .welcome-title { font-size: 1.8rem; margin-bottom: 10px; }
         .welcome-status { background: #334155; padding: 10px; border-radius: 6px; font-size: 0.9rem; color: #94a3b8; margin-bottom: 30px; }
         .shift-btn-group { display: flex; flex-direction: column; gap: 15px; }
-        .btn-shift { padding: 18px; border-radius: 8px; font-size: 1.1rem; color: white; width: 100%; text-align: center; text-decoration: none; }
+        .btn-shift { padding: 18px; border-radius: 8px; font-size: 1.1rem; color: white; width: 100%; text-align: center; display: block; }
         .btn-gb { background: linear-gradient(135deg, #10b981, #059669); }
         .btn-gs { background: linear-gradient(135deg, #f43f5e, #e11d48); }
         .btn-pos-entry { background: linear-gradient(135deg, #38bdf8, #0284c7); margin-top: 10px; }
 
-        /* 💻 SCREEN 3: MAIN CORE CORE POS TERMINAL DOCK */
-        .pos-terminal { width: 100vw; height: 100vh; display: flex; flex-direction: column; background: #0f172a; }
-        
-        /* ALERTS AND STATUS HEADER ŞERİDİ */
+        /* 💻 SCREEN 3: MAIN CORE POS TERMINAL DOCK */
+        .pos-terminal { width: 100vw; height: 100vh; display: flex; flex-direction: column; background: #0f172a; position: fixed; top: 0; left: 0; z-index: 100; }
         .pos-header { height: 50px; background: #1e293b; border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
         .license-alert { background: #eab308; color: #0f172a; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; animation: blink 2s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
@@ -51,7 +49,7 @@
         .nav-tab-btn { background: transparent; color: #94a3b8; padding: 0 15px; height: 100%; font-size: 0.9rem; border-bottom: 3px solid transparent; border-radius: 0; }
         .nav-tab-btn.active { color: #38bdf8; border-bottom-color: #38bdf8; background: rgba(56, 189, 248, 0.05); }
 
-        .pos-body { flex: 1; display: flex; overflow: hidden; position: relative; }
+        .pos-body { flex: 1; display: flex; overflow: hidden; position: relative; width: 100%; }
         .tab-panel { width: 100%; height: 100%; display: flex; }
 
         /* SUB-MODULE 1: TABLES AND GRID MAP */
@@ -60,13 +58,13 @@
         .zone-btn { background: #1e293b; color: #94a3b8; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; border: 1px solid #334155; }
         .zone-btn.active { background: #38bdf8; color: #0f172a; border-color: #38bdf8; font-weight: 700; }
         .grid-map { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 15px; padding: 20px; overflow-y: auto; }
-        .table-box { background: #1e293b; border: 1px solid #334155; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100px; color: #fff; font-size: 1.1rem; position: relative; }
+        .table-box { background: #1e293b; border: 1px solid #334155; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100px; color: #fff; font-size: 1.1rem; position: relative; cursor: pointer; }
         .table-box.occupied { background: #f43f5e; border-color: #f43f5e; }
         .table-box.bill-requested { background: #a855f7; border-color: #a855f7; }
         .table-box .table-price { font-size: 0.8rem; margin-top: 5px; color: #cbd5e1; }
 
         /* ADISYON ADDS VE ORDER GRID PANEL (SAMBAPOS LAYOUT) */
-        .order-dock { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; display: flex; z-index: 10; }
+        .order-dock { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; display: flex; z-index: 110; }
         .ticket-col { width: 320px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; }
         .ticket-header { padding: 15px; background: #0f172a; border-bottom: 1px solid #334155; font-weight: 700; display: flex; justify-content: space-between; }
         .ticket-items { flex: 1; padding: 10px; overflow-y: auto; }
@@ -75,11 +73,11 @@
         .ticket-total { padding: 15px; background: #0f172a; border-top: 1px solid #334155; text-align: right; font-size: 1.3rem; font-weight: 800; color: #10b981; }
         
         .menu-col { flex: 1; display: flex; flex-direction: column; border-right: 1px solid #334155; }
-        .menu-cats { height: 60px; background: #1e293b; border-bottom: 1px solid #334155; display: flex; gap: 5px; padding: 5px; overflow-x: auto; }
-        .cat-btn { background: #0f172a; color: #94a3b8; padding: 0 15px; border-radius: 6px; font-size: 0.85rem; border: 1px solid #334155; white-space: nowrap; }
+        .menu-cats { height: 60px; background: #1e293b; border-bottom: 1px solid #334155; display: flex; gap: 5px; padding: 5px; overflow-x: auto; align-items: center; }
+        .cat-btn { background: #0f172a; color: #94a3b8; padding: 8px 15px; border-radius: 6px; font-size: 0.85rem; border: 1px solid #334155; white-space: nowrap; height: fit-content; }
         .cat-btn.active { background: #38bdf8; color: #0f172a; font-weight: 700; border-color: #38bdf8; }
         .menu-products { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; padding: 15px; overflow-y: auto; }
-        .prod-grid-btn { background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: white; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; height: 90px; }
+        .prod-grid-btn { background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: white; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; height: 90px; cursor: pointer; }
         .prod-grid-btn .p-price { color: #38bdf8; font-size: 0.85rem; font-weight: 700; }
 
         .action-col { width: 130px; background: #1e293b; display: flex; flex-direction: column; gap: 8px; padding: 10px; }
@@ -89,7 +87,7 @@
         .act-btn.print-bill-btn { background: #a855f7; }
 
         /* DEV NUMPAD VE SAMBAPOS SETTLEMENT PAY MATRIX PANEL */
-        .payment-dock { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; display: flex; z-index: 20; }
+        .payment-dock { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; display: flex; z-index: 120; }
         .pay-summary-left { width: 320px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; padding: 20px; }
         .pay-sum-card { background: #0f172a; border: 1px solid #334155; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         .pay-sum-card h4 { font-size: 0.85rem; color: #64748b; margin-bottom: 5px; }
@@ -98,6 +96,5 @@
         .pay-numpad-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; border-right: 1px solid #334155; }
         .numpad-display { width: 100%; max-width: 320px; background: #1e293b; border: 1px solid #334155; padding: 15px; text-align: right; font-size: 2rem; font-weight: 800; border-radius: 8px; margin-bottom: 20px; color: #38bdf8; height: 75px; }
         .numpad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 320px; }
-        .num-btn { background: #1e293b; border: 1px solid #334155; color: white; padding: 18px; border-radius: 8px; font-size: 1.4rem; }
+        .num-btn { background: #1e293b; border: 1px solid #334155; color: white; padding: 18px; border-radius: 8px; font-size: 1.4rem; cursor: pointer; }
         
-        .pay-methods-right { width: 220px; background: #1e293b; display: flex; flex-direction: column; gap: 15px; padding: 20px; }
