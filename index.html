@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexaPOS - Bulut Tabanlı Yeni Nesil Restoran Otomasyonu</title>
     <style>
-        /* GLOBAL CORES AND STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
         body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; }
         .hidden { display: none !important; }
         button { cursor: pointer; transition: 0.2s; border: none; font-weight: 600; }
         button:active { transform: scale(0.97); }
 
-        /* MODAL WINDOWS STRUCTURE */
+        /* MODAL WINDOWS */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 999; }
         .modal-content { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
         .modal-content h3 { margin-bottom: 15px; color: #38bdf8; }
@@ -52,7 +51,7 @@
         .pos-body { flex: 1; display: flex; overflow: hidden; position: relative; width: 100%; }
         .tab-panel { width: 100%; height: 100%; display: flex; }
 
-        /* SUB-MODULE 1: TABLES AND GRID MAP */
+        /* MASA VE BÖLGE GRUPLARI */
         .tables-layout { flex: 1; display: flex; flex-direction: column; height: 100%; }
         .zone-bar { height: 50px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; gap: 5px; padding: 5px 15px; align-items: center; }
         .zone-btn { background: #1e293b; color: #94a3b8; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; border: 1px solid #334155; }
@@ -63,7 +62,7 @@
         .table-box.bill-requested { background: #a855f7; border-color: #a855f7; }
         .table-box .table-price { font-size: 0.8rem; margin-top: 5px; color: #cbd5e1; }
 
-        /* ADISYON ADDS VE ORDER GRID PANEL (SAMBAPOS LAYOUT) */
+        /* ADİSYON SİPARİŞ EKRANI */
         .order-dock { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; display: flex; z-index: 110; }
         .ticket-col { width: 320px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; }
         .ticket-header { padding: 15px; background: #0f172a; border-bottom: 1px solid #334155; font-weight: 700; display: flex; justify-content: space-between; }
@@ -86,7 +85,7 @@
         .act-btn.pay-trigger-btn { background: #38bdf8; color: #0f172a; font-weight: 700; }
         .act-btn.print-bill-btn { background: #a855f7; }
 
-        /* DEV NUMPAD VE SAMBAPOS SETTLEMENT PAY MATRIX PANEL */
+        /* ÖDEME EKRANI */
         .payment-dock { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; display: flex; z-index: 120; }
         .pay-summary-left { width: 320px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; padding: 20px; }
         .pay-sum-card { background: #0f172a; border: 1px solid #334155; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
@@ -98,3 +97,4 @@
         .numpad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 320px; }
         .num-btn { background: #1e293b; border: 1px solid #334155; color: white; padding: 18px; border-radius: 8px; font-size: 1.4rem; cursor: pointer; }
         
+        .pay-methods-right { width: 220px; background: #1e293b; display: flex; flex-direction: column; gap: 15px; padding: 20px; }
